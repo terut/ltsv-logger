@@ -1,6 +1,7 @@
 # LTSV::Logger
 
 Logger for LTSV(Labeled Tab-separated Values) format.
+See http://ltsv.org/ about LTSV.
 
 ## Installation
 
