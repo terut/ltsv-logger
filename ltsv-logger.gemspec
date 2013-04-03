@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.email                 = ["terut.dev+github@gmail.com"]
   gem.description           = %q{LTSV(Labeled Tab-separated Values) logger}
   gem.summary               = %q{LTSV(Labeled Tab-separated Values) logger}
-  gem.homepage              = "https://github.com/terut/ltsv-logger"
+  gem.homepage              = "http://terut.github.com/ltsv-logger"
 
   gem.add_development_dependency('rake', '~> 10.0.0')
   gem.add_development_dependency('rspec', '~> 2.13.0')
