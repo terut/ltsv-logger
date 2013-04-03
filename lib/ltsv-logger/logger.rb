@@ -1,3 +1,4 @@
+require 'logger'
 module LTSV
   module Logger
     class Logger < ::Logger
