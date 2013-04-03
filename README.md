@@ -18,11 +18,10 @@ Or install it yourself as:
 
 ## Usage
 
-Use Hash instead of String message:
+Use `Hash` instead of `String` message:
 
 ```ruby
 # e.g.: rails
-
 require 'ltsv-logger'
 
 LTSV::Logger.open(File.join('log', "event_#{Rails.env}.log"))
@@ -31,7 +30,7 @@ LTSV.logger.info ltsv # => time:2013-04-02 21:55:05 +0900 method:GET uri:/?max_i
 
 ```
 
-if logging Hash like request parameters, serialize Hash. e.g.:`Hash.to_json`:
+If logging `Hash` like request parameters, serialize `Hash`. e.g.:`Hash.to_json`:
 
 ```ruby
 # e.g.: rails
@@ -41,7 +40,13 @@ ltsv = { method: "GET", uri: "/?max_id=9235&page=2", status: 200, params: params
 LTSV.logger.info ltsv # => time:2013-04-02 21:55:05 +0900 method:GET uri:/?max_id=9235&page=2 status:200 params:{"max_id":"9235","page":"2","controller":"foo","action":"bar"}
 ```
 
-Maybe, To use `Marshal` is not good, because it's difficult to deserialize with other programe launguage.
+Maybe, to use `Marshal` is not good, because it's difficult to deserialize with other programe launguage.
+
+Other way, you can use `String`, as usual:
+
+```ruby
+LTSV.logger.info "This is sample." # => time:2013-04-02 21:55:05 +0900 message:This is sample.
+```
 
 ## Contributing
 
@@ -50,3 +55,6 @@ Maybe, To use `Marshal` is not good, because it's difficult to deserialize with 
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Copyright
+Copyright © 2013 terut. See LICENSE.txt(MIT-LICENCE) for further details.
