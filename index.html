@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="LTSVLogger : LTSV (Labeled Tab-separated Values) logger for ruby." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>LTSVLogger</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/terut/ltsv-logger">View on GitHub</a>
+
+          <h1 id="project_title">LTSVLogger</h1>
+          <h2 id="project_tagline">LTSV (Labeled Tab-separated Values) logger for ruby.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/terut/ltsv-logger/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/terut/ltsv-logger/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>LTSV::Logger</h1>
+
+<p>Logger for LTSV(Labeled Tab-separated Values) format.</p>
+
+<h2>Installation</h2>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<pre><code>gem 'ltsv-logger'
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre><code>$ gem install ltsv-logger
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>Use <code>Hash</code> instead of <code>String</code> message:</p>
+
+<div class="highlight"><pre><span class="c1"># e.g.: rails</span>
+<span class="nb">require</span> <span class="s1">'ltsv-logger'</span>
+
+<span class="ss">LTSV</span><span class="p">:</span><span class="ss">:Logger</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'log'</span><span class="p">,</span> <span class="s2">"event_</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="si">}</span><span class="s2">.log"</span><span class="p">))</span>
+<span class="n">ltsv</span> <span class="o">=</span> <span class="p">{</span> <span class="nb">method</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span> <span class="ss">uri</span><span class="p">:</span> <span class="s2">"/foo"</span><span class="p">,</span> <span class="ss">status</span><span class="p">:</span> <span class="mi">200</span> <span class="p">}</span>
+<span class="no">LTSV</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span> <span class="n">ltsv</span> <span class="c1"># =&gt; time:2013-04-02 21:55:05 +0900 method:GET uri:/?max_id=9235&amp;page=2 status:200</span>
+
+</pre></div>
+
+<p>If logging <code>Hash</code> like request parameters, serialize <code>Hash</code>. e.g.:<code>Hash.to_json</code>:</p>
+
+<div class="highlight"><pre><span class="c1"># e.g.: rails</span>
+<span class="c1"># params = { max_id: 9235, page: 2, controller: 'foo', action: 'bar' }</span>
+
+<span class="n">ltsv</span> <span class="o">=</span> <span class="p">{</span> <span class="nb">method</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span> <span class="ss">uri</span><span class="p">:</span> <span class="s2">"/?max_id=9235&amp;page=2"</span><span class="p">,</span> <span class="ss">status</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="n">params</span><span class="o">.</span><span class="n">to_json</span> <span class="p">}</span>
+<span class="no">LTSV</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span> <span class="n">ltsv</span> <span class="c1"># =&gt; time:2013-04-02 21:55:05 +0900 method:GET uri:/?max_id=9235&amp;page=2 status:200 params:{"max_id":"9235","page":"2","controller":"foo","action":"bar"}</span>
+</pre></div>
+
+<p>Maybe, to use <code>Marshal</code> is not good, because it's difficult to deserialize with other programe launguage.</p>
+
+<p>Other way, you can use <code>String</code>, as usual:</p>
+
+<div class="highlight"><pre><span class="no">LTSV</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span> <span class="s2">"This is sample."</span> <span class="c1"># =&gt; time:2013-04-02 21:55:05 +0900 message:This is sample.</span>
+</pre></div>
+
+<h2>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol><h2>Copyright</h2>
+
+<p>Copyright © 2013 terut. See LICENSE.txt(MIT-LICENCE) for further details.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">LTSVLogger maintained by <a href="https://github.com/terut">terut</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
